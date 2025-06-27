@@ -1,10 +1,12 @@
-const jsonServer = require("json-server"); // importing json-server library
+const jsonServer = require('json-server');
 const server = jsonServer.create();
-const router = jsonServer.router("db.json");
+const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
-const port = 8080; // you can use any port number here; i chose to use 3001
 
 server.use(middlewares);
 server.use(router);
 
-server.listen(port);
+// Export as a Vercel handler
+module.exports = (req, res) => {
+  server(req, res);
+};
